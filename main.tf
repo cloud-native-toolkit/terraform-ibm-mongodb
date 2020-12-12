@@ -13,7 +13,6 @@ locals {
   resource_location = var.resource_location
 }
 
-// AppID - App Authentication
 resource "ibm_resource_instance" "mongodb_instance" {
   name              = local.name
   service           = local.service
