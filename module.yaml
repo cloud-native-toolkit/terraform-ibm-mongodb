@@ -1,0 +1,13 @@
+name: ibm-mongodb
+type: terraform
+description: Module to provision Databases for MongoDB instance
+tags:
+    - tools
+    - infrastructure
+    - mongodb
+    - saas
+versions:
+- platforms:
+    - kubernetes
+    - ocp3
+    - ocp4
