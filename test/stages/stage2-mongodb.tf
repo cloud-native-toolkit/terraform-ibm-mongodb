@@ -6,5 +6,5 @@ module "dev_tools_mongodb" {
   cluster_id = module.dev_cluster.id
   namespaces = [module.dev_capture_tools_state.namespace]
   namespace_count = 1
-  name_prefix = var.cluster_name
+  name_prefix = var.name_prefix
 }
