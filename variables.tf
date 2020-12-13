@@ -40,3 +40,9 @@ variable "plan" {
   description = "The type of plan the service instance should run under (standard)"
   default     = "standard"
 }
+
+variable "role" {
+  type        = string
+  description = "The role of the generated credential (Viewer, Administrator, Operator, Editor)"
+  default     = "Editor"
+}

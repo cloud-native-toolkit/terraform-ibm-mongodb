@@ -7,7 +7,6 @@ data "ibm_resource_group" "tools_resource_group" {
 }
 
 locals {
-  role              = "Writer"
   name_prefix       = var.name_prefix != "" ? var.name_prefix : var.resource_group_name
   resource_location = var.resource_location
 }
@@ -30,7 +29,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
 
 resource "ibm_resource_key" "mongodb_key" {
   name                 = "${ibm_resource_instance.mongodb_instance.name}-key"
-  role                 = local.role
+  role                 = var.role
   resource_instance_id = ibm_resource_instance.mongodb_instance.id
 
   //User can increase timeouts
