@@ -7,14 +7,16 @@ data "ibm_resource_group" "tools_resource_group" {
 }
 
 locals {
+  service           = "databases-for-mongodb"
   name_prefix       = var.name_prefix != "" ? var.name_prefix : var.resource_group_name
+  name              = "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-mongodb"
   resource_location = var.resource_location
 }
 
 // AppID - App Authentication
 resource "ibm_resource_instance" "mongodb_instance" {
-  name              = "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-mongodb"
-  service           = "databases-for-mongodb"
+  name              = local.name
+  service           = local.service
   plan              = var.plan
   location          = local.resource_location
   resource_group_id = data.ibm_resource_group.tools_resource_group.id
@@ -27,10 +29,19 @@ resource "ibm_resource_instance" "mongodb_instance" {
   }
 }
 
+data "ibm_resource_instance" "mongodb_instance" {
+  depends_on        = [ibm_resource_instance.mongodb_instance]
+
+  name              = local.name
+  resource_group_id = data.ibm_resource_group.tools_resource_group.id
+  location          = local.resource_location
+  service           = local.service
+}
+
 resource "ibm_resource_key" "mongodb_key" {
-  name                 = "${ibm_resource_instance.mongodb_instance.name}-key"
+  name                 = "${local.name}-key"
   role                 = var.role
-  resource_instance_id = ibm_resource_instance.mongodb_instance.id
+  resource_instance_id = data.ibm_resource_instance.mongodb_instance.id
 
   //User can increase timeouts
   timeouts {
@@ -43,7 +54,7 @@ resource "ibm_container_bind_service" "mongodb_service_binding" {
   count = var.namespace_count
 
   cluster_name_id       = var.cluster_id
-  service_instance_id   = ibm_resource_instance.mongodb_instance.id
+  service_instance_id   = data.ibm_resource_instance.mongodb_instance.id
   namespace_id          = var.namespaces[count.index]
   resource_group_id     = data.ibm_resource_group.tools_resource_group.id
   key                   = ibm_resource_key.mongodb_key.name
