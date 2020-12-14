@@ -52,13 +52,13 @@ resource "ibm_resource_key" "mongodb_key" {
 
 resource "null_resource" "print_config" {
   provisioner "local-exec" {
-    command = "echo \"Binding to cluster: ${var.cluster_id}, service id: ${data.ibm_resource_instance.mongodb_instance.id}\""
+    command = "echo \"Binding to cluster: ${var.cluster_id}, service id: ${data.ibm_resource_instance.mongodb_instance.id}, key name: ${ibm_resource_key.mongodb_key.name}\""
   }
 }
 
 resource "ibm_container_bind_service" "mongodb_service_binding" {
   count = var.namespace_count
-  depends_on = ["null_resource.print_config"]
+  depends_on = [null_resource.print_config]
 
   cluster_name_id       = var.cluster_id
   service_instance_id   = data.ibm_resource_instance.mongodb_instance.id
