@@ -61,7 +61,7 @@ resource "ibm_container_bind_service" "mongodb_service_binding" {
   depends_on = [null_resource.print_config]
 
   cluster_name_id       = var.cluster_id
-  service_instance_id   = data.ibm_resource_instance.mongodb_instance.id
+  service_instance_name = data.ibm_resource_instance.mongodb_instance.name
   namespace_id          = var.namespaces[count.index]
   resource_group_id     = data.ibm_resource_group.tools_resource_group.id
   key                   = ibm_resource_key.mongodb_key.id
