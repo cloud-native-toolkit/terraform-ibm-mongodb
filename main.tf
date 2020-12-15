@@ -23,7 +23,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
   tags              = var.tags
 
   timeouts {
-    create = "15m"
+    create = "30m"
     update = "15m"
     delete = "15m"
   }
