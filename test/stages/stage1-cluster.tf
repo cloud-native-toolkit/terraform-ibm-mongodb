@@ -1,5 +1,5 @@
 module "dev_cluster" {
-  source = "github.com/ibm-garage-cloud/terraform-ibm-container-platform.git"
+  source = "github.com/ibm-garage-cloud/terraform-ibm-container-platform.git?ref=fix-cluster-id"
 
   resource_group_name     = var.resource_group_name
   cluster_name            = var.cluster_name
