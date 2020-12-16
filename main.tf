@@ -19,8 +19,8 @@ data "ibm_resource_instance" "kp_instance" {
   resource_group_id = data.ibm_resource_group.tools_resource_group.id
 }
 
-data "ibm_kp_key" "mongodb-key" {
-  key_protect_id = data.ibm_resource_instance.kp_instance.guid
+data "ibm_kms_key" "mongodb-key" {
+  instance_id = data.ibm_resource_instance.kp_instance.guid
   key_name = var.key-protect-key
 }
 
@@ -34,7 +34,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
 
   parameters = {
     key_protect_instance = data.ibm_resource_instance.kp_instance.guid
-    key_protect_key      = data.ibm_kp_key.mongodb-key.id
+    key_protect_key      = data.ibm_kms_key.mongodb-key.keys[0].id
   }
 
   timeouts {
