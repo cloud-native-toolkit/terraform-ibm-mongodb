@@ -15,7 +15,7 @@ locals {
 
 data "ibm_resource_instance" "kp_instance" {
   name = var.key-protect-name
-  region = var.key-protect-region
+  location = var.key-protect-region
 }
 
 data "ibm_kp_key" "mondodb-key" {
