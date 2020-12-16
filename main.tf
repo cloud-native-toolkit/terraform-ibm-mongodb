@@ -29,9 +29,12 @@ resource "ibm_resource_instance" "mongodb_instance" {
   plan                 = var.plan
   location             = local.resource_location
   resource_group_id    = data.ibm_resource_group.tools_resource_group.id
-  key_protect_instance = data.ibm_resource_instance.kp_instance.guid
-  key_protect_key      = data.ibm_kp_key.mongodb-key.id
   tags                 = var.tags
+
+  parameters = {
+    key_protect_instance = data.ibm_resource_instance.kp_instance.guid
+    key_protect_key      = data.ibm_kp_key.mongodb-key.id
+  }
 
   timeouts {
     create = "30m"
