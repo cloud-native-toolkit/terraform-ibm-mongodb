@@ -18,7 +18,7 @@ data "ibm_resource_instance" "kp_instance" {
   location = var.key-protect-region
 }
 
-data "ibm_kp_key" "mondodb-key" {
+data "ibm_kp_key" "mongodb-key" {
   key_protect_id = data.ibm_resource_instance.kp_instance.guid
   key_name = var.key-protect-key
 }
