@@ -16,7 +16,7 @@ locals {
 data "ibm_resource_instance" "kp_instance" {
   name = var.key-protect-name
   location = var.key-protect-region
-  resource_group_id = data.ibm_resource_group.tools_resource_group
+  resource_group_id = data.ibm_resource_group.tools_resource_group.id
 }
 
 data "ibm_kp_key" "mongodb-key" {
