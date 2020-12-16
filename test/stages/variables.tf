@@ -48,3 +48,21 @@ variable "vpc_cluster" {
   description = "Flag indicating that this is a vpc cluster"
   default     = false
 }
+
+variable "key-protect-region" {
+  type        = string
+  description = "The region where the Key Protect instance has been provisioned"
+  default     = ""
+}
+
+variable "key-protect-name" {
+  type        = string
+  description = "The name of the Key Protect instance"
+  default     = ""
+}
+
+variable "key-protect-key" {
+  type        = string
+  description = "The name of the key in the Key Protect instance"
+  default     = ""
+}
