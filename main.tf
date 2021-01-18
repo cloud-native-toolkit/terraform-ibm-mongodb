@@ -18,8 +18,7 @@ locals {
   key-protect-region = var.key-protect-region != "" ? var.key-protect-region : var.resource_location
   byok-enabled       = var.key-protect-name != "" && var.key-protect-key-id != ""
   parameters         = local.byok-enabled ? {
-    key_protect_instance = data.ibm_resource_instance.kp_instance[0].guid
-    key_protect_key      = var.key-protect-key-id
+    disk_encryption_key_crn = data.ibm_kms_key.key[0].crn
   } : {}
 }
 
@@ -35,6 +34,13 @@ data "ibm_resource_instance" "kp_instance" {
   name = var.key-protect-name
   location = local.key-protect-region
   resource_group_id = data.ibm_resource_group.kp_resource_group.id
+}
+
+data "ibm_kms_key" "key" {
+  count = local.byok-enabled ? 1 : 0
+
+  instance_id = data.ibm_resource_instance.kp_instance[0].guid
+  key_name    = var.key-protect-key-name
 }
 
 resource "ibm_resource_instance" "mongodb_instance" {
