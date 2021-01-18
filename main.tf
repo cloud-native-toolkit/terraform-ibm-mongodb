@@ -20,7 +20,7 @@ data "ibm_resource_instance" "kp_instance" {
 }
 
 data "ibm_kms_key" "mongodb-key" {
-  instance_id = data.ibm_resource_instance.kp_instance.guid
+  instance_id = data.ibm_resource_instance.kp_instance.id
   key_name = var.key-protect-key
 }
 
@@ -33,7 +33,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
   tags                 = var.tags
 
   parameters = {
-    key_protect_instance = data.ibm_resource_instance.kp_instance.guid
+    key_protect_instance = data.ibm_resource_instance.kp_instance.id
     key_protect_key      = data.ibm_kms_key.mongodb-key.keys[0].id
   }
 
