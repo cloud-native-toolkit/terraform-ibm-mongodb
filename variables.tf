@@ -34,7 +34,13 @@ variable "role" {
 
 variable "key-protect-region" {
   type        = string
-  description = "The region where the Key Protect instance has been provisioned"
+  description = "The region where the Key Protect instance has been provisioned. If not provided defaults to the same region as the MongoDB instance"
+  default     = ""
+}
+
+variable "key-protect-resource-group" {
+  type        = string
+  description = "The resource group where the Key Protect instance has been provisioned. If not provided defaults to the same resource group as the MongoDB instance"
   default     = ""
 }
 
