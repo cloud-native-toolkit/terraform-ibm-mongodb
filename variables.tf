@@ -47,6 +47,7 @@ variable "key-protect-resource-group" {
 variable "key-protect-name" {
   type        = string
   description = "The name of the Key Protect instance"
+  default     = ""
 }
 
 variable "key-protect-key-id" {
@@ -58,4 +59,5 @@ variable "key-protect-key-id" {
 variable "key-protect-key" {
   type        = string
   description = "The name of the key in the Key Protect instance"
+  default     = ""
 }
