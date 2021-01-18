@@ -1,7 +1,8 @@
 # Databases for MongoDB terraform module
 
 This terraform module will provision an instance of MongoDB into an account and optionally bind the credentials
-into a set of namespaces in a cluster
+into a set of namespaces in a cluster. If the key protect values are provided then it will provision the instance using
+the provided encryption key. 
 
 ## Software dependencies
 
