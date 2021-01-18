@@ -23,6 +23,12 @@ locals {
   } : {}
 }
 
+resource "null_resource" "print-params" {
+  provisioner "local-exec" {
+    command = "echo \"BYOK enabled: ${local.byok-enabled}, parameters: ${jsonencode(local.parameters)}\""
+  }
+}
+
 data "ibm_resource_instance" "kp_instance" {
   count = local.byok-enabled ? 1 : 0
 
