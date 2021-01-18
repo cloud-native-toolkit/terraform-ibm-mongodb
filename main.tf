@@ -1,5 +1,6 @@
 provider "ibm" {
   version = ">= 1.17.0"
+  region = local.key-protect-region
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -22,9 +23,17 @@ locals {
   } : {}
 }
 
+resource "null_resource" "print_kp_guid" {
+  count = local.byok-enabled ? 1 : 0
+
+  provisioner "local-exec" {
+    command = "echo \"BYOK enabled: ${local.byok-enabled}, key-protect: ${data.ibm_resource_instance.kp_instance[0].guid}\""
+  }
+}
+
 resource "null_resource" "print-params" {
   provisioner "local-exec" {
-    command = "echo \"BYOK enabled: ${local.byok-enabled}, parameters: ${jsonencode(local.parameters)}\""
+    command = "echo \"parameters: ${jsonencode(local.parameters)}\""
   }
 }
 
