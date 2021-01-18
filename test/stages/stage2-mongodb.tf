@@ -6,5 +6,6 @@ module "dev_tools_mongodb" {
   name_prefix          = var.name_prefix
   key-protect-region   = var.key-protect-region
   key-protect-name     = var.key-protect-name
+  key-protect-key-id   = var.key-protect-key-id
   key-protect-key-name = var.key-protect-key-name
 }
