@@ -18,7 +18,7 @@ locals {
   key-protect-region = var.key-protect-region != "" ? var.key-protect-region : var.resource_location
   byok-enabled       = var.key-protect-name != "" && var.key-protect-key-id != ""
   parameters         = local.byok-enabled ? {
-    disk_encryption_key_crn = data.ibm_kms_key.key[0].crn
+    disk_encryption_key_crn = data.ibm_kms_key.key[0].keys[0].crn
   } : {}
 }
 
