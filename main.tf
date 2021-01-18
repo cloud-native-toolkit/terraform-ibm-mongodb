@@ -16,7 +16,7 @@ locals {
   name               = "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-mongodb"
   key-protect-resource-group = var.key-protect-resource-group != "" ? var.key-protect-resource-group : var.resource_group_name
   key-protect-region = var.key-protect-region != "" ? var.key-protect-region : var.resource_location
-  byok-enabled       = var.key-protect-name != "" && var.key-protect-key-name != ""
+  byok-enabled       = var.key-protect-name != "" && var.key-protect-key != ""
   parameters         = local.byok-enabled ? {
     disk_encryption_key_crn = data.ibm_kms_key.key[0].keys[0].crn
   } : {}
@@ -40,7 +40,7 @@ data "ibm_kms_key" "key" {
   count = local.byok-enabled ? 1 : 0
 
   instance_id = data.ibm_resource_instance.kp_instance[0].guid
-  key_name    = var.key-protect-key-name
+  key_name    = var.key-protect-key
 }
 
 resource "ibm_resource_instance" "mongodb_instance" {
