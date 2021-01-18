@@ -61,8 +61,8 @@ variable "key-protect-name" {
   default     = ""
 }
 
-variable "key-protect-key" {
+variable "key-protect-key-id" {
   type        = string
-  description = "The name of the key in the Key Protect instance"
+  description = "The id of the key in the Key Protect instance"
   default     = ""
 }
