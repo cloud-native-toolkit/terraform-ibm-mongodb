@@ -31,3 +31,33 @@ variable "role" {
   description = "The role of the generated credential (Viewer, Administrator, Operator, Editor)"
   default     = "Editor"
 }
+
+variable "key-protect-region" {
+  type        = string
+  description = "The region where the Key Protect instance has been provisioned. If not provided defaults to the same region as the MongoDB instance"
+  default     = ""
+}
+
+variable "key-protect-resource-group" {
+  type        = string
+  description = "The resource group where the Key Protect instance has been provisioned. If not provided defaults to the same resource group as the MongoDB instance"
+  default     = ""
+}
+
+variable "key-protect-name" {
+  type        = string
+  description = "The name of the Key Protect instance"
+  default     = ""
+}
+
+variable "key-protect-key" {
+  type        = string
+  description = "The name of the key in the Key Protect instance"
+  default     = ""
+}
+
+variable "authorize-kms" {
+  type        = bool
+  description = "Flag indicating that the authorization for MongoDB to read keys in the KMS should be created"
+  default     = false
+}

@@ -1,7 +1,7 @@
 # Databases for MongoDB terraform module
 
-This terraform module will provision an instance of MongoDB into an account and optionally bind the credentials
-into a set of namespaces in a cluster
+This terraform module will provision an instance of MongoDB into an account. If the key protect values are provided then it will provision the instance using
+the provided encryption key. 
 
 ## Software dependencies
 
@@ -14,7 +14,7 @@ The module depends on the following software components:
 
 ### Terraform providers
 
-- IBM Cloud provider >= 1.5.3
+- IBM Cloud provider >= 1.17.0
 
 ## Module dependencies
 
@@ -30,11 +30,12 @@ module "dev_infrastructure_mongodb" {
 
   resource_group_name = module.dev_cluster.resource_group_name
   resource_location   = module.dev_cluster.region
-  cluster_id          = module.dev_cluster.id
-  namespaces          = []
-  namespace_count     = 0
   name_prefix         = var.name_prefix
   tags                = [module.dev_cluster.tag]
+  key-protect-region  = var.key-protect-region
+  key-protect-name    = var.key-protect-name
+  key-protect-key     = var.key-protect-key
+  authorize-kms       = var.authorize-kms == "true"
 }
 ```
 
