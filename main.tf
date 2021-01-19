@@ -52,6 +52,15 @@ data "ibm_kms_key" "key" {
   key_name    = var.key-protect-key
 }
 
+resource "ibm_iam_authorization_policy" "policy" {
+  count = local.byok-enabled && var.authorize-kms ? 1 : 0
+
+  source_service_name         = local.service
+  target_service_name         = "kms"
+  target_resource_instance_id = data.ibm_resource_instance.kp_instance[0].id
+  roles                       = ["Reader"]
+}
+
 resource "ibm_resource_instance" "mongodb_instance" {
   name                 = local.name
   service              = local.service
