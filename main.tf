@@ -57,7 +57,6 @@ resource "ibm_iam_authorization_policy" "policy" {
 
   source_service_name         = local.service
   target_service_name         = "kms"
-  target_resource_instance_id = data.ibm_resource_instance.kp_instance[0].id
   roles                       = ["Reader"]
 }
 
