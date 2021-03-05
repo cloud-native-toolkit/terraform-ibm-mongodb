@@ -62,6 +62,8 @@ resource "ibm_iam_authorization_policy" "policy" {
 }
 
 resource "ibm_resource_instance" "mongodb_instance" {
+  depends_on = [ibm_iam_authorization_policy.policy]
+
   name                 = local.name
   service              = local.service
   plan                 = var.plan
