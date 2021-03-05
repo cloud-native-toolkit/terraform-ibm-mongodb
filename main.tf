@@ -74,7 +74,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
   parameters = local.parameters
 
   timeouts {
-    create = "30m"
+    create = "60m"
     update = "15m"
     delete = "15m"
   }
