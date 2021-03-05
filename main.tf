@@ -57,11 +57,12 @@ resource "ibm_iam_authorization_policy" "policy" {
 
   source_service_name         = local.service
   target_service_name         = "kms"
-  target_resource_instance_id = data.ibm_resource_instance.kp_instance[0].id
   roles                       = ["Reader"]
 }
 
 resource "ibm_resource_instance" "mongodb_instance" {
+  depends_on = [ibm_iam_authorization_policy.policy]
+
   name                 = local.name
   service              = local.service
   plan                 = var.plan
@@ -72,7 +73,7 @@ resource "ibm_resource_instance" "mongodb_instance" {
   parameters = local.parameters
 
   timeouts {
-    create = "30m"
+    create = "60m"
     update = "15m"
     delete = "15m"
   }
