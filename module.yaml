@@ -11,3 +11,4 @@ versions:
     - kubernetes
     - ocp3
     - ocp4
+  variables: []
