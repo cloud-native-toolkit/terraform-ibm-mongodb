@@ -1,8 +1,13 @@
-provider "ibm" {
+terraform {
+  required_providers {
+    ibm = {
   source = "ibm-cloud/ibm"
   version = ">= 1.25.0"
   region = local.key-protect-region
 }
+}
+}
+
 
 data "ibm_resource_group" "resource_group" {
   name = var.resource_group_name
