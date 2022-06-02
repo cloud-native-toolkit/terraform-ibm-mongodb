@@ -12,6 +12,9 @@ versions:
     - ocp3
     - ocp4
   variables: []
+  providers:
+    - name: ibm
+      source: "ibm-cloud/ibm"
   
 
 
