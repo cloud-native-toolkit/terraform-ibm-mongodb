@@ -1,5 +1,6 @@
 provider "ibm" {
   #version = ">= 1.25.0"
+  source = "ibm-cloud/ibm"
   region = local.key-protect-region
 }
 
