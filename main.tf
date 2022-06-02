@@ -1,16 +1,16 @@
-provider "ibm" {
-  version = ">= 1.25.0"
-  source = "ibm-cloud/ibm"
-  region = local.key-protect-region
-}
+# provider "ibm" {
+#   version = ">= 1.25.0"
+#   source = "ibm-cloud/ibm"
+#   region = local.key-protect-region
+# }
 
-data "ibm_resource_group" "resource_group" {
-  name = var.resource_group_name
-}
+# data "ibm_resource_group" "resource_group" {
+#   name = var.resource_group_name
+# }
 
-data "ibm_resource_group" "kp_resource_group" {
-  name = local.key-protect-resource-group
-}
+# data "ibm_resource_group" "kp_resource_group" {
+#   name = local.key-protect-resource-group
+# }
 
 locals {
   service            = "databases-for-mongodb"
