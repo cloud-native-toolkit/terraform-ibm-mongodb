@@ -1,4 +1,4 @@
-id: github.com/ibm-garage-cloud/terraform-ibm-mongodb
+id: github.com/cloud-native-toolkit/terraform-ibm-mongodb
 name: ibm-mongodb
 type: terraform
 description: Module to provision Databases for MongoDB instance
@@ -8,6 +8,70 @@ tags:
   - mongodb
   - saas
 versions:
+  - platforms:
+      - kubernetes
+      - ocp3
+      - ocp4
+    providers:
+      - name: ibm
+        source: ibm-cloud/ibm
+    dependencies: []
+    variables:
+      - name: resource_group_name
+        type: string
+        description: Resource group where the cluster has been provisioned.
+      - name: resource_location
+        type: string
+        description: Geographic location of the resource (e.g. us-south, us-east)
+      - name: tags
+        type: list(string)
+        description: Tags that should be applied to the service
+        default: []
+      - name: name_prefix
+        type: string
+        description: >-
+          The prefix name for the service. If not provided it will default to
+          the resource group name
+        default: ''
+      - name: plan
+        type: string
+        description: The type of plan the service instance should run under (standard)
+        default: standard
+      - name: role
+        type: string
+        description: >-
+          The role of the generated credential (Viewer, Administrator, Operator,
+          Editor)
+        default: Editor
+      - name: key-protect-region
+        type: string
+        description: >-
+          The region where the Key Protect instance has been provisioned. If not
+          provided defaults to the same region as the MongoDB instance
+        default: ''
+      - name: key-protect-resource-group
+        type: string
+        description: >-
+          The resource group where the Key Protect instance has been
+          provisioned. If not provided defaults to the same resource group as
+          the MongoDB instance
+        default: ''
+      - name: key-protect-name
+        type: string
+        description: The name of the Key Protect instance
+        default: ''
+      - name: key-protect-key
+        type: string
+        description: The name of the key in the Key Protect instance
+        default: ''
+      - name: authorize-kms
+        type: bool
+        description: >-
+          Flag indicating that the authorization for MongoDB to read keys in the
+          KMS should be created
+        default: false
+    version: v1.1.2
+    outputs: []
   - platforms:
       - kubernetes
       - ocp3
@@ -27,8 +91,10 @@ versions:
         optional: true
       - name: name_prefix
         type: string
-        description: The prefix name for the service. If not provided it will default to the resource group name
-        default: ""
+        description: >-
+          The prefix name for the service. If not provided it will default to
+          the resource group name
+        default: ''
         optional: true
       - name: plan
         type: string
@@ -37,32 +103,41 @@ versions:
         optional: true
       - name: role
         type: string
-        description: The role of the generated credential (Viewer, Administrator, Operator, Editor)
+        description: >-
+          The role of the generated credential (Viewer, Administrator, Operator,
+          Editor)
         default: Editor
         optional: true
       - name: key-protect-region
         type: string
-        description: The region where the Key Protect instance has been provisioned. If not provided defaults to the same region as the MongoDB instance
-        default: ""
+        description: >-
+          The region where the Key Protect instance has been provisioned. If not
+          provided defaults to the same region as the MongoDB instance
+        default: ''
         optional: true
       - name: key-protect-resource-group
         type: string
-        description: The resource group where the Key Protect instance has been provisioned. If not provided defaults to the same resource group as the MongoDB instance
-        default: ""
+        description: >-
+          The resource group where the Key Protect instance has been
+          provisioned. If not provided defaults to the same resource group as
+          the MongoDB instance
+        default: ''
         optional: true
       - name: key-protect-name
         type: string
         description: The name of the Key Protect instance
-        default: ""
+        default: ''
         optional: true
       - name: key-protect-key
         type: string
         description: The name of the key in the Key Protect instance
-        default: ""
+        default: ''
         optional: true
       - name: authorize-kms
         type: bool
-        description: Flag indicating that the authorization for MongoDB to read keys in the KMS should be created
+        description: >-
+          Flag indicating that the authorization for MongoDB to read keys in the
+          KMS should be created
         default: false
         optional: true
   - platforms:
@@ -83,7 +158,9 @@ versions:
         optional: true
       - name: name_prefix
         type: string
-        description: The prefix name for the service. If not provided it will default to the resource group name
+        description: >-
+          The prefix name for the service. If not provided it will default to
+          the resource group name
         optional: true
       - name: plan
         type: string
@@ -91,15 +168,22 @@ versions:
         optional: true
       - name: role
         type: string
-        description: The role of the generated credential (Viewer, Administrator, Operator, Editor)
+        description: >-
+          The role of the generated credential (Viewer, Administrator, Operator,
+          Editor)
         optional: true
       - name: key-protect-region
         type: string
-        description: The region where the Key Protect instance has been provisioned. If not provided defaults to the same region as the MongoDB instance
+        description: >-
+          The region where the Key Protect instance has been provisioned. If not
+          provided defaults to the same region as the MongoDB instance
         optional: true
       - name: key-protect-resource-group
         type: string
-        description: The resource group where the Key Protect instance has been provisioned. If not provided defaults to the same resource group as the MongoDB instance
+        description: >-
+          The resource group where the Key Protect instance has been
+          provisioned. If not provided defaults to the same resource group as
+          the MongoDB instance
         optional: true
       - name: key-protect-name
         type: string
@@ -111,7 +195,9 @@ versions:
         optional: true
       - name: authorize-kms
         type: bool
-        description: Flag indicating that the authorization for MongoDB to read keys in the KMS should be created
+        description: >-
+          Flag indicating that the authorization for MongoDB to read keys in the
+          KMS should be created
         optional: true
     outputs:
       - name: output "my
