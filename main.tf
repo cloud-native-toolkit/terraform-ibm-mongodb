@@ -1,5 +1,5 @@
 provider "ibm" {
-  version = ">= 1.17.0"
+  version = ">= 1.25.0"
   region = local.key-protect-region
 }
 

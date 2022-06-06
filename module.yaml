@@ -11,3 +11,11 @@ versions:
     - kubernetes
     - ocp3
     - ocp4
+  providers:
+    - name: ibm
+      source: "ibm-cloud/ibm"
+  dependencies: []
+  variables: []
+  
+
+
