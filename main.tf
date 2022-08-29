@@ -3,7 +3,16 @@ provider "ibm" {
   region = local.key-protect-region
 }
 
+resource null_resource print_names {
+
+  provisioner "local-exec" {
+    command = "echo 'Resource group name: ${var.resource_group_name}'"
+  }
+}
+
 data "ibm_resource_group" "resource_group" {
+  depends_on = [null_resource.print_names]
+  
   name = var.resource_group_name
 }
 
