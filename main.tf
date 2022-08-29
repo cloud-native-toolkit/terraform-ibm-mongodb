@@ -17,6 +17,8 @@ data "ibm_resource_group" "resource_group" {
 }
 
 data "ibm_resource_group" "kp_resource_group" {
+  depends_on = [null_resource.print_names]
+  
   name = local.key-protect-resource-group
 }
 
