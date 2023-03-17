@@ -34,7 +34,6 @@ locals {
   } : {}
 
   credentials        = jsondecode(ibm_resource_key.mongodb_key.credentials_json)
-  host               = credentials.
 }
 
 resource "null_resource" "print_kp_guid" {
