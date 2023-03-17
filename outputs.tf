@@ -27,7 +27,7 @@ output "username" {
 output "password" {
   value = local.credentials.connection.mongodb.authentication.password
   description = "The password for the database instance"
-  sensitive: true
+  sensitive = true
 }
 
 output "ca_cert" {
