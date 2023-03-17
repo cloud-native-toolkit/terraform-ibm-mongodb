@@ -1,6 +1,8 @@
 name: ibm-mongodb
 type: terraform
 description: Module to provision Databases for MongoDB instance
+interfaces:
+  - github.com/cloud-native-toolkit/automation-modules#database
 tags:
     - tools
     - infrastructure
