@@ -32,6 +32,8 @@ locals {
   parameters         = local.byok-enabled ? {
     disk_encryption_key_crn = data.ibm_kms_key.key[0].keys[0].crn
   } : {}
+
+  credentials        = jsondecode(ibm_resource_key.mongodb_key.credentials_json)
 }
 
 resource "null_resource" "print_kp_guid" {
